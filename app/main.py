@@ -1,11 +1,13 @@
 from fastapi import FastAPI, UploadFile, File, Form, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from deepface import DeepFace
+from prometheus_fastapi_instrumentator import Instrumentator
 import shutil
 import os
 from datetime import datetime
 
 app = FastAPI()
+Instrumentator().instrument(app).expose(app)
 
 os.makedirs("faces", exist_ok=True)
 
